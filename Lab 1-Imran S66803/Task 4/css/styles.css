@@ -1,0 +1,40 @@
+.bg {
+    background-image: url('../img/milkbg.jpg');
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.overlay {
+    position: absolute;
+    min-height: 50%;
+    min-width: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.text {
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.about-us {
+    display: flex;
+    align-items: center;
+    background-color: grey;
+    margin: 50px 0 0 0;
+    /* padding: 50px; */
+}
+
+.contact-us {
+    text-align: center;
+    color: white;
+    background-color:rgb(105, 105, 255);
+    padding: 20px;
+}
