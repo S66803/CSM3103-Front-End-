@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <title>Lab 5 : Task 1</title>
+    <meta charset="utf-8">
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.js"
+      integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+      crossorigin="anonymous"></script>
+    <link rel="stylesheet" href=
+      "https://cdnjs.cloudflare.com/ajax/libs/mini.css/2.0.2/mini-default.css">
+    <style>
+      body { margin: 20px; }
+      #color_change { border: 1px solid; }
+      .cow_color { font-weight: bold; }
+    </style>
+    
+    <script>
+    $(document).ready(function() {
+        //Select the change button
+        var button = $('#button_change');
+        //Setting a click listener for button
+        $(button).click(function(){
+            
+            //Retrieving and storing the input value
+            var input_color = $('#input_color');
+
+            var input_value = $(input_color).val();
+
+            var element = $('.door_color');
+
+            $(element).html(input_value);
+
+            $('body').css('color', input_value);
+        });
+    });
+    </script>
+  </head>
+  <body>
+     
+    <h2> Paint it <span class="door_color">Black</span> by The Rolling Stones(1966)</h2>
+    <p>I see a red door and I want it painted <span class="door_color">Black</span>
+    </p>
+
+    <p>My Wanted Color is :
+        <select id="input_color">
+            <option value="Black">Black</option>
+            <option value="Blue">Blue</option>
+            <option value="Green">Green</option>
+            <option value="Red">Red</option>
+            <option value="Yellow">Yellow</option>
+            <option value="Purple">Purple</option>
+            
+        </select>
+        <button id="button_change">
+            Change!
+        </button>
+    </p>
+  </body>
+</html>
+
+
+
+
+
