@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>First Care</title>
+</head>
+<body>
+  <h1>First Care</h1>
+  <fieldset>
+    <legend>Carer Registration 2024/2025</legend>
+    <form id="registerForm">
+      <table>
+        <tr>
+          <td><label for="name">Name:</label></td>
+          <td><input type="text" id="name" name="name" required></td>
+        </tr>
+        <tr>
+          <td><label for="address">Address:</label></td>
+          <td><input type="text" id="address" name="address" required></td>
+        </tr>
+        <tr>
+          <td><label for="nophone">Phone Number:</label></td>
+          <td><input type="text" id="nophone" name="nophone" required></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <button type="submit" id="submit">Submit</button>
+            <button type="reset" id="reset">Cancel</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </fieldset>
+  <a href="login.html">Sign in if you already have an account</a>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+    import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCDs2oFuCOtecjEiZ_F5gf2UZgN554T4SE",
+      authDomain: "lab-6-3e63d.firebaseapp.com",
+      databaseURL: "https://lab-6-3e63d-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "lab-6-3e63d",
+      storageBucket: "lab-6-3e63d.appspot.com",
+      messagingSenderId: "1041402007751",
+      appId: "1:1041402007751:web:c437b89600a6c01e4f6ee2",
+      measurementId: "G-T2BD64K7F6"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    document.getElementById('registerForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const cName = document.querySelector("#name").value;
+      const cAddress = document.querySelector("#address").value;
+      const cNophone = document.querySelector("#nophone").value;
+
+      set(ref(db, "carer/" + cName), {
+        name: cName,
+        address: cAddress,
+        nophone: cNophone
+      })
+      .then(() => {
+        alert("Data added successfully!");
+        window.location.href = 'login.html';
+      })
+      .catch((error) => {
+        alert("Error: " + error.message);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>First Care - User List</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table, th, td {
+      border: 1px solid black;
+    }
+    th, td {
+      padding: 15px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    #addUserButton {
+      margin: 20px 0;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #addUserButton:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>First Care - User List</h1>
+  <button id="addUserButton">+ Add New User</button>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Phone Number</th>
+      </tr>
+    </thead>
+    <tbody id="userTableBody">
+      <!-- User data will be appended here -->
+    </tbody>
+  </table>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+    import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCDs2oFuCOtecjEiZ_F5gf2UZgN554T4SE",
+      authDomain: "lab-6-3e63d.firebaseapp.com",
+      databaseURL: "https://lab-6-3e63d-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "lab-6-3e63d",
+      storageBucket: "lab-6-3e63d.appspot.com",
+      messagingSenderId: "1041402007751",
+      appId: "1:1041402007751:web:c437b89600a6c01e4f6ee2",
+      measurementId: "G-T2BD64K7F6"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    function displayUsers() {
+      const dbRef = ref(db);
+      get(child(dbRef, 'carer')).then((snapshot) => {
+        if (snapshot.exists()) {
+          const carers = snapshot.val();
+          const userTableBody = document.getElementById('userTableBody');
+          userTableBody.innerHTML = '';
+
+          for (const key in carers) {
+            if (carers.hasOwnProperty(key)) {
+              const user = carers[key];
+              const row = document.createElement('tr');
+              row.innerHTML = `
+                <td>${user.name}</td>
+                <td>${user.address}</td>
+                <td>${user.nophone}</td>
+              `;
+              userTableBody.appendChild(row);
+            }
+          }
+        } else {
+          alert("No data available");
+        }
+      }).catch((error) => {
+        alert("Error: " + error.message);
+      });
+    }
+
+    displayUsers();
+
+    document.getElementById('addUserButton').addEventListener('click', function() {
+      window.location.href = 'register.html';
+    });
+  </script>
+</body>
+</html>
+
